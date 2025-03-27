@@ -1,0 +1,285 @@
+
+!
+! Last configuration change at 08:07:08 UTC Tue Mar 18 2025
+!
+version 17.12
+service timestamps debug datetime msec
+service timestamps log datetime msec
+platform qfp utilization monitor load 80
+platform punt-keepalive disable-kernel-core
+!
+hostname R2
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+ip dhcp excluded-address 192.168.1.1 192.168.1.3
+ip dhcp excluded-address 192.168.1.65 192.168.1.67
+ip dhcp excluded-address 192.168.1.97 192.168.1.99
+ip dhcp excluded-address 192.168.1.129 192.168.1.131
+ip dhcp excluded-address 192.168.1.161 192.168.1.163
+ip dhcp excluded-address 192.168.1.177 192.168.1.179
+ip dhcp excluded-address 192.168.1.193 192.168.1.195
+ip dhcp excluded-address 192.168.1.217 192.168.1.219
+ip dhcp excluded-address 192.168.1.4 192.168.1.32
+ip dhcp excluded-address 192.168.1.68 192.168.1.80
+ip dhcp excluded-address 192.168.1.100 192.168.1.112
+ip dhcp excluded-address 192.168.1.132 192.168.1.144
+ip dhcp excluded-address 192.168.1.164 192.168.1.168
+ip dhcp excluded-address 192.168.1.180 192.168.1.184
+ip dhcp excluded-address 192.168.1.196 192.168.1.200
+ip dhcp excluded-address 192.168.1.212
+ip dhcp excluded-address 192.168.1.220
+!
+ip dhcp pool VLAN10-R2
+ network 192.168.1.0 255.255.255.192
+ default-router 192.168.1.3 
+ dns-server 192.168.1.214 
+ lease 7
+!
+ip dhcp pool VLAN20-R2
+ network 192.168.1.64 255.255.255.224
+ default-router 192.168.1.67 
+ dns-server 192.168.1.214 
+ lease 7
+!
+ip dhcp pool VLAN30-R2
+ network 192.168.1.96 255.255.255.224
+ default-router 192.168.1.99 
+ dns-server 192.168.1.214 
+ lease 7
+!
+ip dhcp pool VLAN40-R2
+ network 192.168.1.128 255.255.255.224
+ default-router 192.168.1.131 
+ dns-server 192.168.1.214 
+ lease 7
+!
+ip dhcp pool VLAN60-R2
+ network 192.168.1.176 255.255.255.240
+ default-router 192.168.1.179 
+ dns-server 192.168.1.214 
+ lease 7
+!
+ip dhcp pool VLAN70-R2
+ network 192.168.1.192 255.255.255.240
+ default-router 192.168.1.195 
+ dns-server 192.168.1.214 
+ lease 7
+!
+ip dhcp pool VLAN90-R2
+ network 192.168.1.216 255.255.255.248
+ default-router 192.168.1.219 
+ dns-server 192.168.1.214 
+ lease 7
+!
+ip dhcp pool VLAN50-R2
+ network 192.168.1.160 255.255.255.240
+ default-router 192.168.1.163 
+ dns-server 192.168.1.214 
+ lease 7
+!
+!
+!
+login on-success log
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+vtp version 1
+multilink bundle-name authenticated
+!
+pae
+!
+!
+crypto pki trustpoint TP-self-signed-1998914335
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-1998914335
+ revocation-check none
+ rsakeypair TP-self-signed-1998914335
+ hash sha256
+!
+crypto pki trustpoint SLA-TrustPoint
+ enrollment pkcs12
+ revocation-check crl
+ hash sha256
+!
+!
+crypto pki certificate chain TP-self-signed-1998914335
+ certificate self-signed 01
+  30820330 30820218 A0030201 02020101 300D0609 2A864886 F70D0101 0B050030 
+  31312F30 2D060355 04030C26 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 31393938 39313433 3335301E 170D3235 30333133 30363236 
+  32315A17 0D333530 33313330 36323632 315A3031 312F302D 06035504 030C2649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D31 39393839 
+  31343333 35308201 22300D06 092A8648 86F70D01 01010500 0382010F 00308201 
+  0A028201 010092D7 56550E87 3CD2197F 2C047552 6F0CA882 08FCC27E 0D1F394F 
+  8B2BBA56 506A2A56 30EC514F 46D2D76F 7F7A49B0 18DDE169 98359B03 60E3078F 
+  DB86B9BA D47ABD16 16590E3B 1CDF3CF7 9CE60410 34E3102A BCCF77E4 01B93ABA 
+  CF00CB5F F5E5A2D5 A37BA13A AAA4422D F65DA055 809156FB 2F524E65 C8DBE7E8 
+  60308C2E FCA79AD0 DF5475EB 51C45D0E 20EE8119 3CC1EA75 FA92E186 4700624A 
+  EE359BA4 68CD3174 E1F8C0C6 6CAEE58A 42FD2515 D0821C21 629A6660 C438E2F4 
+  867C55CC 1C032A15 55C09B30 13D0675C 6C58E332 5287B2D1 421A629B 218C82E1 
+  CD7E8982 A85865B0 A4B8E830 AE182AE8 F872EA2E D0800067 808C006A 35805856 
+  76CC25D7 44FB0203 010001A3 53305130 1D060355 1D0E0416 0414D3D4 7D316CA3 
+  9F73FBB0 7CFC0BE8 CC18A5DB D7C6301F 0603551D 23041830 168014D3 D47D316C 
+  A39F73FB B07CFC0B E8CC18A5 DBD7C630 0F060355 1D130101 FF040530 030101FF 
+  300D0609 2A864886 F70D0101 0B050003 82010100 3FC531ED 0C4C7AC3 3E7A4A7D 
+  E6B18315 93CF23E6 64B8B98F 6D92CA1B 0DA631B3 C0D5DE77 3BC275D7 6C940CCE 
+  2CDD6C97 F63D03A3 72B3E6A4 0EA6CD5D F90D17CD B59DBAA1 CBCAD353 CB0441CD 
+  08AD0DF3 160CFA29 17E29318 46F4786B 2526682C BA8B9FBC D999C0E1 CA6316CF 
+  761F1173 6C5DCC74 D362C05A 469B7064 75E03B61 CA28233D AF3C293E 5B0573DC 
+  5C73BE3D 8B06F1E2 6DFE3909 E4740C7B DFC06FFB 9A23DEFF 8374EC60 D1F46DDE 
+  86CF8988 CF16E0AF A1FD2ADC 42D444F1 810FA79A 72CB3E21 9ED055B9 D1CDEE24 
+  13FC92CF B6FE0A7D 1FD37C29 87FE6C10 028A5506 63DD4DC0 B3256CFB A6C406BC 
+  54EF0724 DA1B629F 4665AEA7 DCBA3951 E2EC030F
+  	quit
+crypto pki certificate chain SLA-TrustPoint
+ certificate ca 01
+  30820321 30820209 A0030201 02020101 300D0609 2A864886 F70D0101 0B050030 
+  32310E30 0C060355 040A1305 43697363 6F312030 1E060355 04031317 43697363 
+  6F204C69 63656E73 696E6720 526F6F74 20434130 1E170D31 33303533 30313934 
+  3834375A 170D3338 30353330 31393438 34375A30 32310E30 0C060355 040A1305 
+  43697363 6F312030 1E060355 04031317 43697363 6F204C69 63656E73 696E6720 
+  526F6F74 20434130 82012230 0D06092A 864886F7 0D010101 05000382 010F0030 
+  82010A02 82010100 A6BCBD96 131E05F7 145EA72C 2CD686E6 17222EA1 F1EFF64D 
+  CBB4C798 212AA147 C655D8D7 9471380D 8711441E 1AAF071A 9CAE6388 8A38E520 
+  1C394D78 462EF239 C659F715 B98C0A59 5BBB5CBD 0CFEBEA3 700A8BF7 D8F256EE 
+  4AA4E80D DB6FD1C9 60B1FD18 FFC69C96 6FA68957 A2617DE7 104FDC5F EA2956AC 
+  7390A3EB 2B5436AD C847A2C5 DAB553EB 69A9A535 58E9F3E3 C0BD23CF 58BD7188 
+  68E69491 20F320E7 948E71D7 AE3BCC84 F10684C7 4BC8E00F 539BA42B 42C68BB7 
+  C7479096 B4CB2D62 EA2F505D C7B062A4 6811D95B E8250FC4 5D5D5FB8 8F27D191 
+  C55F0D76 61F9A4CD 3D992327 A8BB03BD 4E6D7069 7CBADF8B DF5F4368 95135E44 
+  DFC7C6CF 04DD7FD1 02030100 01A34230 40300E06 03551D0F 0101FF04 04030201 
+  06300F06 03551D13 0101FF04 05300301 01FF301D 0603551D 0E041604 1449DC85 
+  4B3D31E5 1B3E6A17 606AF333 3D3B4C73 E8300D06 092A8648 86F70D01 010B0500 
+  03820101 00507F24 D3932A66 86025D9F E838AE5C 6D4DF6B0 49631C78 240DA905 
+  604EDCDE FF4FED2B 77FC460E CD636FDB DD44681E 3A5673AB 9093D3B1 6C9E3D8B 
+  D98987BF E40CBD9E 1AECA0C2 2189BB5C 8FA85686 CD98B646 5575B146 8DFC66A8 
+  467A3DF4 4D565700 6ADF0F0D CF835015 3C04FF7C 21E878AC 11BA9CD2 55A9232C 
+  7CA7B7E6 C1AF74F6 152E99B7 B1FCF9BB E973DE7F 5BDDEB86 C71E3B49 1765308B 
+  5FB0DA06 B92AFE7F 494E8A9E 07B85737 F3A58BE1 1A48A229 C37C1E69 39F08678 
+  80DDCD16 D6BACECA EEBC7CF9 8428787B 35202CDC 60E4616A B623CDBD 230E3AFB 
+  418616A9 4093E049 4D10AB75 27E86F73 932E35B5 8862FDAE 0275156F 719BB2F0 
+  D697DF7F 28
+  	quit
+!
+!
+diagnostic bootup level minimal
+!
+license udi pid C8200L-1N-4T sn FGL2803L1KU
+memory free low-watermark processor 61453
+!
+spanning-tree extend system-id
+!
+!
+!
+redundancy
+ mode none
+!
+!
+!
+!
+track 1 ip sla 1 reachability
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0/0
+ ip address 192.168.1.226 255.255.255.252
+ ip nat inside
+ negotiation auto
+!
+interface GigabitEthernet0/0/1
+ ip address 192.168.1.233 255.255.255.252
+ ip nat inside
+ negotiation auto
+!
+interface GigabitEthernet0/0/2
+ no ip address
+ shutdown
+ negotiation auto
+!
+interface GigabitEthernet0/0/3
+ no ip address
+ shutdown
+ negotiation auto
+!
+interface GigabitEthernet0/1/0
+ ip address 192.168.1.241 255.255.255.252
+ ip nat inside
+ negotiation auto
+!
+interface GigabitEthernet0/1/1
+ ip address 172.17.10.41 255.255.255.252
+ ip nat outside
+ negotiation auto
+!
+router ospf 1
+ router-id 2.2.2.2
+ passive-interface default
+ no passive-interface GigabitEthernet0/0/0
+ no passive-interface GigabitEthernet0/0/1
+ no passive-interface GigabitEthernet0/1/0
+ network 192.168.1.224 0.0.0.3 area 0
+ network 192.168.1.232 0.0.0.3 area 0
+ network 192.168.1.240 0.0.0.3 area 0
+!
+ip forward-protocol nd
+ip http server
+ip http authentication local
+ip http secure-server
+!
+ip nat pool MY_POOL xxx.xxx.xxx.81 xxx.xxx.xxx.86 netmask 255.255.255.248
+ip nat inside source static 192.168.1.212 xxx.xxx.xxx.82
+ip nat inside source static 192.168.1.214 xxx.xxx.xxx.84
+ip nat inside source static 192.168.1.213 xxx.xxx.xxx.86
+ip nat inside source list 1 pool MY_POOL overload
+ip route 0.0.0.0 0.0.0.0 172.17.10.42 track 1
+ip route 0.0.0.0 0.0.0.0 192.168.1.225 200
+ip ssh bulk-mode 131072
+!
+!
+ip sla 1
+ icmp-echo 172.17.10.42 source-interface GigabitEthernet0/1/1
+  frequency 10
+ip sla schedule 1 life forever start-time now
+ip access-list standard 1
+ 10 permit 192.168.1.0 0.0.0.255
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ stopbits 1
+line aux 0
+line vty 0 4
+ login
+ transport input ssh
+line vty 5 14
+ login
+ transport input ssh
+!
+!
+!
+!
+!
+!
+!
+end

@@ -1,0 +1,17 @@
+$TTL    86400
+@       IN      SOA     ns1.p2-2.sitict.net. admin.p2-2.sitict.net. (
+                              2025031302 ; Serial in YYYYMMDDNN format
+                              3600       ; Refresh
+                              1800       ; Retry
+                              604800     ; Expire
+                              86400 )    ; Minimum TTL
+;
+@       IN      NS      ns1.p2-2.sitict.net.
+@       IN      A       192.168.1.212
+@       IN      A       xxx.xxx.xxx.86 
+ns1     IN      A       192.168.1.213
+
+; These A records are for static NAT mappings:
+; ns1     IN      A       xxx.xxx.xxx.86    ; Primary public IP via R1
+ns1     IN      A       xxx.xxx.xxx.86    ; Secondary public IP via R2
+www     IN      CNAME   p2-2.sitict.net.
